@@ -164,29 +164,27 @@ export function SymptomTracker() {
         </div>
       </div>
       <ul className="space-y-4">
-        {symptoms.map((symptom) => (
-          <li key={symptom.id}>
-            <div className="mb-2 flex justify-between text-sm">
-              <span className="font-medium text-[#1e3a4f]">{symptom.label}</span>
-              <span className="text-[#64748b]" aria-live="polite">
-                {(() => {
-                  const currentRating = ratings[symptom.id];
-                  return currentRating !== undefined ? levels[currentRating] : "—";
-                })()}
-              </span>
-            </div>
-            <div className="flex gap-1">
-              {levels.map((level, index) => (
-                <button
-                  key={level}
-                  type="button"
-                  onClick={() =>
-                    setRatings((prev) => ({ ...prev, [symptom.id]: index }))
-                  }
-                  className={`h-2 flex-1 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a9e7a] focus-visible:ring-offset-1 ${
-                    (() => {
-                      const currentRating = ratings[symptom.id];
-                      return currentRating !== undefined && index <= currentRating
+        {symptoms.map((symptom) => {
+          const currentRating = ratings[symptom.id];
+
+          return (
+            <li key={symptom.id}>
+              <div className="mb-2 flex justify-between text-sm">
+                <span className="font-medium text-[#1e3a4f]">{symptom.label}</span>
+                <span className="text-[#64748b]" aria-live="polite">
+                  {currentRating !== undefined ? levels[currentRating] : "—"}
+                </span>
+              </div>
+              <div className="flex gap-1">
+                {levels.map((level, index) => (
+                  <button
+                    key={level}
+                    type="button"
+                    onClick={() =>
+                      setRatings((prev) => ({ ...prev, [symptom.id]: index }))
+                    }
+                    className={`h-2 flex-1 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a9e7a] focus-visible:ring-offset-1 ${
+                      currentRating !== undefined && index <= currentRating
                         ? index === 0
                           ? "bg-[#8bc4a8]"
                           : index === 1
@@ -194,16 +192,16 @@ export function SymptomTracker() {
                             : index === 2
                               ? "bg-[#b8b0d4]"
                               : "bg-[#c4a8b0]"
-                        : "bg-[#e8f2fa]";
-                    })()
-                  }`}
-                  aria-label={`${symptom.label}: ${level}`}
-                  title={level}
-                />
-              ))}
-            </div>
-          </li>
-        ))}
+                        : "bg-[#e8f2fa]"
+                    }`}
+                    aria-label={`${symptom.label}: ${level}`}
+                    title={level}
+                  />
+                ))}
+              </div>
+            </li>
+          );
+        })}
       </ul>
 
       <button
