@@ -193,7 +193,41 @@ export function EmotionalCheckIn() {
         Save today&apos;s check-in
       </button>
 
-      <div className="mt-6 rounded-xl border border-[#e8f2fa] bg-[#f4f8fc]/40 p-4">
+      <div className="mt-5 rounded-xl border border-[#e8f2fa] bg-[#f4f8fc]/35 p-4">
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <h3 className="text-sm font-semibold text-[#1e3a4f]">Mood trends</h3>
+          <span className="text-xs text-[#64748b]">{filterLabel}</span>
+        </div>
+        {history.length === 0 ? (
+          <p className="rounded-lg bg-[#e8f2fa]/50 px-3 py-2 text-sm text-[#4a7fa8]">
+            Save an entry to see your trends.
+          </p>
+        ) : trendPoints.length > 0 ? (
+          <ul className="flex items-end gap-2 overflow-x-auto pb-2">
+            {trendPoints.map((point) => (
+              <li key={point.id} className="min-w-10 flex-1">
+                <div className="flex h-28 items-end">
+                  <div
+                    className="w-full rounded-t-md bg-gradient-to-t from-[#8bc4a8] via-[#7eb8da] to-[#b8b0d4]"
+                    style={{ height: `${Math.max(10, (point.value / moods.length) * 100)}%` }}
+                    aria-hidden
+                  />
+                </div>
+                <p className="mt-1 text-center text-sm" aria-hidden>
+                  {point.emoji}
+                </p>
+                <p className="text-center text-[10px] text-[#64748b]">{point.label}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="rounded-lg bg-[#e8f2fa]/50 px-3 py-2 text-sm text-[#4a7fa8]">
+            No check-ins for this filter yet.
+          </p>
+        )}
+      </div>
+
+      <div className="mt-5 rounded-xl border border-[#e8f2fa] bg-[#f4f8fc]/40 p-4">
         <h3 className="text-sm font-semibold text-[#1e3a4f]">Filter history</h3>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           {filterOptions.map((option) => (
@@ -233,36 +267,6 @@ export function EmotionalCheckIn() {
               />
             </label>
           </div>
-        )}
-      </div>
-
-      <div className="mt-5 rounded-xl border border-[#e8f2fa] bg-[#f4f8fc]/35 p-4">
-        <div className="mb-3 flex items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold text-[#1e3a4f]">Mood trend</h3>
-          <span className="text-xs text-[#64748b]">{filterLabel}</span>
-        </div>
-        {trendPoints.length > 0 ? (
-          <ul className="flex items-end gap-2 overflow-x-auto pb-2">
-            {trendPoints.map((point) => (
-              <li key={point.id} className="min-w-10 flex-1">
-                <div className="flex h-28 items-end">
-                  <div
-                    className="w-full rounded-t-md bg-gradient-to-t from-[#8bc4a8] via-[#7eb8da] to-[#b8b0d4]"
-                    style={{ height: `${Math.max(10, (point.value / moods.length) * 100)}%` }}
-                    aria-hidden
-                  />
-                </div>
-                <p className="mt-1 text-center text-sm" aria-hidden>
-                  {point.emoji}
-                </p>
-                <p className="text-center text-[10px] text-[#64748b]">{point.label}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="rounded-lg bg-[#e8f2fa]/50 px-3 py-2 text-sm text-[#4a7fa8]">
-            No check-ins for this filter yet.
-          </p>
         )}
       </div>
 
@@ -312,7 +316,12 @@ export function EmotionalCheckIn() {
           })}
         </ul>
 
-        {isLoaded && filteredHistory.length === 0 && (
+        {isLoaded && history.length === 0 && (
+          <p className="mt-3 rounded-xl bg-[#e8f2fa]/50 px-4 py-3 text-sm text-[#4a7fa8]">
+            Save an entry to see your trends.
+          </p>
+        )}
+        {isLoaded && history.length > 0 && filteredHistory.length === 0 && (
           <p className="mt-3 rounded-xl bg-[#e8f2fa]/50 px-4 py-3 text-sm text-[#4a7fa8]">
             No emotional check-ins in this date range yet.
           </p>
