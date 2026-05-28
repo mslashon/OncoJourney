@@ -184,16 +184,18 @@ export function SymptomTracker() {
                     setRatings((prev) => ({ ...prev, [symptom.id]: index }))
                   }
                   className={`h-2 flex-1 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a9e7a] focus-visible:ring-offset-1 ${
-                    ratings[symptom.id] !== undefined &&
-                    index <= ratings[symptom.id]
-                      ? index === 0
-                        ? "bg-[#8bc4a8]"
-                        : index === 1
-                          ? "bg-[#7eb8da]"
-                          : index === 2
-                            ? "bg-[#b8b0d4]"
-                            : "bg-[#c4a8b0]"
-                      : "bg-[#e8f2fa]"
+                    (() => {
+                      const currentRating = ratings[symptom.id];
+                      return currentRating !== undefined && index <= currentRating
+                        ? index === 0
+                          ? "bg-[#8bc4a8]"
+                          : index === 1
+                            ? "bg-[#7eb8da]"
+                            : index === 2
+                              ? "bg-[#b8b0d4]"
+                              : "bg-[#c4a8b0]"
+                        : "bg-[#e8f2fa]";
+                    })()
                   }`}
                   aria-label={`${symptom.label}: ${level}`}
                   title={level}
