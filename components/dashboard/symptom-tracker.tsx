@@ -168,7 +168,7 @@ export function SymptomTracker() {
           <li key={symptom.id}>
             <div className="mb-2 flex justify-between text-sm">
               <span className="font-medium text-[#1e3a4f]">{symptom.label}</span>
-              <span className="text-[#64748b]">
+              <span className="text-[#64748b]" aria-live="polite">
                 {(() => {
                   const currentRating = ratings[symptom.id];
                   return currentRating !== undefined ? levels[currentRating] : "—";
