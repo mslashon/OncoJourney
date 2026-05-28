@@ -1,4 +1,6 @@
 import { EmotionalCheckIn } from "@/components/dashboard/emotional-check-in";
+import { JournalSection } from "@/components/dashboard/journal-section";
+import { NotesQuestionsSection } from "@/components/dashboard/notes-questions-section";
 import { SymptomTracker } from "@/components/dashboard/symptom-tracker";
 
 const timeline = [
@@ -25,23 +27,6 @@ const timeline = [
     title: "Follow-up imaging",
     status: "upcoming" as const,
     note: "Scan to assess response; results ~1 week later.",
-  },
-];
-
-const journalEntries = [
-  {
-    date: "May 22",
-    excerpt:
-      "Felt tired after lunch but a short walk helped. Grateful for my sister's call.",
-  },
-  {
-    date: "May 20",
-    excerpt:
-      "Asked the nurse about mouth sores — got helpful tips. Slept better tonight.",
-  },
-  {
-    date: "May 18",
-    excerpt: "Treatment day was long. Treated myself to tea and quiet music.",
   },
 ];
 
@@ -168,80 +153,9 @@ export default function Home() {
             </ol>
           </section>
 
-          <section className="min-w-0 w-full rounded-2xl border border-white/80 bg-white p-5 shadow-sm shadow-[#7eb8da]/10 sm:p-6">
-            <div className="mb-4 flex items-start gap-3">
-              <span
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e8f2fa] text-lg"
-                aria-hidden
-              >
-                ❓
-              </span>
-              <div>
-                <h2 className="text-lg font-semibold text-[#1e3a4f]">
-                  Notes & questions
-                </h2>
-                <p className="mt-0.5 text-sm text-[#64748b]">
-                  Jot down what to ask at your next visit
-                </p>
-              </div>
-            </div>
-            <textarea
-              className="min-h-[140px] w-full resize-y rounded-xl border border-[#e8f2fa] bg-[#f4f8fc]/50 px-4 py-3 text-sm text-[#1e3a4f] placeholder:text-[#94a3b8] focus:border-[#7eb8da] focus:outline-none focus:ring-2 focus:ring-[#7eb8da]/20"
-              placeholder="e.g. Side effects from last cycle, medication timing, support resources..."
-              aria-label="Notes and questions for your care team"
-            />
-            <button
-              type="button"
-              className="mt-3 w-full rounded-xl bg-[#4a7fa8] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#3d6d92] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7eb8da] focus-visible:ring-offset-2 sm:w-auto"
-            >
-              Save note
-            </button>
-          </section>
+          <NotesQuestionsSection />
 
-          <section className="min-w-0 w-full rounded-2xl border border-white/80 bg-white p-5 shadow-sm shadow-[#8bc4a8]/10 sm:p-6">
-            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex items-start gap-3">
-                <span
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e8f5ee] text-lg"
-                  aria-hidden
-                >
-                  📖
-                </span>
-                <div>
-                  <h2 className="text-lg font-semibold text-[#1e3a4f]">
-                    Journal
-                  </h2>
-                  <p className="mt-0.5 text-sm text-[#64748b]">
-                    Reflect at your own pace
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="w-full shrink-0 rounded-xl border border-[#8bc4a8] bg-[#e8f5ee] px-3 py-1.5 text-sm font-medium text-[#5a9e7a] transition-colors hover:bg-[#d4eddf] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8bc4a8] sm:w-auto"
-              >
-                + New entry
-              </button>
-            </div>
-            <ul className="space-y-3">
-              {journalEntries.map((entry) => (
-                <li
-                  key={entry.date}
-                  className="rounded-xl border border-[#e8f5ee] bg-[#f4f8fc]/40 px-4 py-3"
-                >
-                  <time
-                    className="text-xs font-medium text-[#5a9e7a]"
-                    dateTime={entry.date}
-                  >
-                    {entry.date}
-                  </time>
-                  <p className="mt-1 text-sm leading-relaxed text-[#1e3a4f]">
-                    {entry.excerpt}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <JournalSection />
         </div>
       </main>
 
