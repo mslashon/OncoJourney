@@ -169,9 +169,10 @@ export function SymptomTracker() {
             <div className="mb-2 flex justify-between text-sm">
               <span className="font-medium text-[#1e3a4f]">{symptom.label}</span>
               <span className="text-[#64748b]">
-                {ratings[symptom.id] !== undefined
-                  ? levels[ratings[symptom.id]]
-                  : "—"}
+                {(() => {
+                  const currentRating = ratings[symptom.id];
+                  return currentRating !== undefined ? levels[currentRating] : "—";
+                })()}
               </span>
             </div>
             <div className="flex gap-1">
