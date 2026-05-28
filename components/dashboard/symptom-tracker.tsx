@@ -214,7 +214,7 @@ export function SymptomTracker() {
 
       <div className="mt-5 rounded-xl border border-[#e8f2fa] bg-[#f4f8fc]/35 p-4">
         <div className="mb-3 flex items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold text-[#1e3a4f]">Symptom trends</h3>
+          <h3 className="text-sm font-semibold text-[#1e3a4f]">Trends &amp; History</h3>
           <span className="text-xs text-[#64748b]">{filterLabel}</span>
         </div>
         {history.length === 0 ? (
@@ -243,52 +243,6 @@ export function SymptomTracker() {
             No entries for this filter yet.
           </p>
         )}
-      </div>
-
-      <div className="mt-5 rounded-xl border border-[#e8f5ee] bg-[#f4f8fc]/40 p-4">
-        <h3 className="text-sm font-semibold text-[#1e3a4f]">Filter history</h3>
-        <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          {filterOptions.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onClick={() => setFilterType(option.id)}
-              className={`w-full rounded-lg px-3 py-2 text-xs font-medium transition-colors sm:w-auto ${
-                filterType === option.id
-                  ? "bg-[#e8f2fa] text-[#4a7fa8]"
-                  : "bg-white text-[#64748b] hover:bg-[#eef6fb]"
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-
-        {filterType === "custom" && (
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            <label className="text-xs text-[#64748b]">
-              Start date
-              <input
-                type="date"
-                value={customStartDate}
-                onChange={(event) => setCustomStartDate(event.target.value)}
-                className="mt-1 w-full rounded-lg border border-[#e8f2fa] bg-white px-3 py-2 text-sm text-[#1e3a4f] focus:border-[#7eb8da] focus:outline-none focus:ring-2 focus:ring-[#7eb8da]/20"
-              />
-            </label>
-            <label className="text-xs text-[#64748b]">
-              End date
-              <input
-                type="date"
-                value={customEndDate}
-                onChange={(event) => setCustomEndDate(event.target.value)}
-                className="mt-1 w-full rounded-lg border border-[#e8f2fa] bg-white px-3 py-2 text-sm text-[#1e3a4f] focus:border-[#7eb8da] focus:outline-none focus:ring-2 focus:ring-[#7eb8da]/20"
-              />
-            </label>
-          </div>
-        )}
-      </div>
-
-      <div className="mt-5">
         <div className="mb-3 flex items-center justify-between gap-2">
           <h3 className="text-sm font-semibold text-[#1e3a4f]">Symptom history</h3>
           <span className="text-xs text-[#64748b]">
@@ -342,15 +296,53 @@ export function SymptomTracker() {
           ))}
         </ul>
 
-        {isLoaded && history.length === 0 && (
-          <p className="mt-3 rounded-xl bg-[#e8f2fa]/50 px-4 py-3 text-sm text-[#4a7fa8]">
-            Save an entry to see your trends.
-          </p>
-        )}
         {isLoaded && history.length > 0 && filteredHistory.length === 0 && (
           <p className="mt-3 rounded-xl bg-[#e8f2fa]/50 px-4 py-3 text-sm text-[#4a7fa8]">
             No symptom history in this date range yet.
           </p>
+        )}
+      </div>
+
+      <div className="mt-5 rounded-xl border border-[#e8f5ee] bg-[#f4f8fc]/40 p-4">
+        <h3 className="text-sm font-semibold text-[#1e3a4f]">Filter history</h3>
+        <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          {filterOptions.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => setFilterType(option.id)}
+              className={`w-full rounded-lg px-3 py-2 text-xs font-medium transition-colors sm:w-auto ${
+                filterType === option.id
+                  ? "bg-[#e8f2fa] text-[#4a7fa8]"
+                  : "bg-white text-[#64748b] hover:bg-[#eef6fb]"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+
+        {filterType === "custom" && (
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <label className="text-xs text-[#64748b]">
+              Start date
+              <input
+                type="date"
+                value={customStartDate}
+                onChange={(event) => setCustomStartDate(event.target.value)}
+                className="mt-1 w-full rounded-lg border border-[#e8f2fa] bg-white px-3 py-2 text-sm text-[#1e3a4f] focus:border-[#7eb8da] focus:outline-none focus:ring-2 focus:ring-[#7eb8da]/20"
+              />
+            </label>
+            <label className="text-xs text-[#64748b]">
+              End date
+              <input
+                type="date"
+                value={customEndDate}
+                onChange={(event) => setCustomEndDate(event.target.value)}
+                className="mt-1 w-full rounded-lg border border-[#e8f2fa] bg-white px-3 py-2 text-sm text-[#1e3a4f] focus:border-[#7eb8da] focus:outline-none focus:ring-2 focus:ring-[#7eb8da]/20"
+              />
+            </label>
+          </div>
         )}
       </div>
     </section>
